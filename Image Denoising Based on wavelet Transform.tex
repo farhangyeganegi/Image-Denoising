@@ -1,0 +1,62 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\title{Abstract of Image Denoising based on Wavelet Transform}
+\date{}
+\author{Farhang Yeganegi\\Email: farhang.yeganegi@gmail.com}
+
+
+
+\begin{document}
+\maketitle
+
+Noise is present in an image either in an additive or multiplicative form. The additive form can be shown by the following equation\\
+\begin{equation}
+y = x + n
+\end{equation}
+while the multiplicative form will be\\
+\begin{equation}
+y = xn
+\end{equation}
+The additive form is approximately ideal and barely seen in the real application of image processing, however, multiplicative form happens a lot. For instance, Ultrasonography which is very popular owing to its lack of radiation and relatively low-cost in medical diagnosis. However, owing to the coherence of backscattered echo signals, medical ultrasound images generally suffer from speckle noise. Image denoising is a process that used to enhance the image quality after degraded by the noise. There are several methods have been proposed for image denoising. In this project, the proposed method is based on using the wavelet transform. The wavelet transform is the best method for analyzing the image due to the ability to split the image into subbands and work on each subband frequencies separately. Now, I want to indicate how wavelet transform can be used for the image denoising purpose.
+
+First, we should apply the wavelet transform to the image. This will result in four subbands and I call them $CA$, $CH$, $CV$, $CD$. $CA$ is the approximate subband while $CH$, $CD$, and $CD$ are the detail subbands. Thresholding should be applied to the detail subbands and in this project, both hard thresholding and soft thresholding are considered. Hard thresholding is represented like below\\
+\begin{equation}
+\hat{d}_{ij} = 
+\left\{
+	\begin{array}{ll}
+		d_{ij}  &  |d_{ij}| \geq T \\
+		0  &  d_{ij} < T
+	\end{array}
+\right.
+\end{equation}
+while soft thresholding is represented by\\
+\begin{equation}
+\hat{d}_{ij} = 
+\left\{
+	\begin{array}{ll}
+		d_{ij}-T  &  d_{ij} \geq T \\
+		0  &  -T < d_{ij} < T \\
+		d_{ij}+T  &  d_{ij}<-T
+	\end{array}
+\right.
+\end{equation}
+where $d_{ij}$, $\hat{d}_{ij}$, and $T$ are wavelet coefficients of noisy image, wavelet coefficients of denoised image, and the threshold value, respectively. Using Donoho's work, threshold value can be obtained by the following equation\\
+\begin{equation}
+T = \sigma \sqrt{2\log_{10} N}
+\end{equation}
+where $\sigma$ and $N$ are standard deviation of noise and length of each subband, respectively. $\sigma$ can be estimated by\\
+\begin{equation}
+\sigma = median(|CD(i,j)|)/0.6745
+\end{equation}
+Therefore, if you follow the procedures, you can implement wavelet based image denoising easily. Also, you can use my code in github as your reference. If you have any question, please send me an E-mail.
+\\
+\begin{center}
+\large{My Supervisor: Professor Hamidreza Amindavar\\ Professor at Amirkabir University of Technology\\ Affiliated Professor at University of Washington}
+\end{center}
+
+
+\end{document}

@@ -1,0 +1,76 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\title{Image Denoising Based on Singular Value Decomposition\\ Farhang Yeganegi\\ Email: farhang.yeganegi@gmail.com}
+\date{}
+
+
+\begin{document}
+	\maketitle
+
+Image denoising based on singular value decomposition is one of my favorites. Actually, I believe that singular value decomposition (SVD) is one of the most powerful tools in signal processing society. In this paper, I want to indicate how we can use SVD for the image denoising purpose. Suppose we have a noisy image $A_{m\times n}$ with the rank $p$ and we apply SVD to it:\\
+\begin{equation}
+A = USV^{T}
+\end{equation}
+where $U_{m\times m}$ and $V_{n\times n}$ are orthogonal matrices and $S_{m\times n}$ is a diagonal matrix whose diameter values are the singular values of $A$.
+\[
+S_{m\times n} = diag(\sigma_1,...,\sigma_{\mu})
+\]
+\begin{equation}
+\sigma_1 \geq \sigma_2 \geq ... \geq \sigma_p>0
+\end{equation}
+\[
+\mu = min\{m,n\}
+\]
+\[
+\sigma_{p+1}=\sigma_{p+2}=...=\sigma_{\mu}=0
+\]
+where $\sigma_1$ and $\sigma_p$ are the largest and smallest nonzero singular values of the matrix $A$, respectively. It can be proved that if we keep only the first $k$ singular values ($k<\mu$), then we can improve the quality of the noisy image respect to mean square error (MSE) cost function. Actually, finding the optimal solution for $k$ to minimize the cost function is very interesting, however, I do not want to mention the procedure in this paper. Now I show you the results of image denoising based on SVD. I used different values of $k$ and for each $k$, I calculated the MSE and then plot the curve. The image that I used is\\
+\begin{center}
+\includegraphics[scale=0.4]{1.png}
+\end{center}
+\begin{center}
+Figure1: Test image
+\end{center}
+and here are the results for different values of standard deviation of the noise (the noise is additive gaussian)\\
+\\
+\begin{center}
+\includegraphics[scale=0.32]{2.png}
+\end{center}
+\begin{center}
+Figure1: Standard deviation = 5.
+\end{center}
+\begin{center}
+\includegraphics[scale=0.32]{3.png}
+\end{center}
+\begin{center}
+Figure2: Standard deviation = 10.
+\end{center}
+\begin{center}
+\includegraphics[scale=0.32]{4.png}
+\end{center}
+\begin{center}
+Figure3: Standard deviation = 15.
+\end{center}
+\begin{center}
+\includegraphics[scale=0.32]{5.png}
+\end{center}
+\begin{center}
+Figure4: Standard deviation = 20.
+\end{center}
+Now I should explain that what the beta is. In order to find the value $k$ in each step, I used a special thresholding function like below. However, in this paper, I do not want to prove why this thresholding function is true since it is behind the scope of the paper.\\
+\begin{equation}
+Thresholding Function = \beta \sigma_n
+\end{equation}
+where $\sigma_n$ is the standard deviation of the noise. $k$ is the index of the first singular value that is greater or equal to the thresholding function.\\
+\\
+\begin{center}
+\large{My Supervisor: Professor Hamidreza Amindavar\\ Professor at Amirkabir University of Technology\\ Affiliated Professor at University of Washington}
+\end{center}
+
+
+
+\end{document}
